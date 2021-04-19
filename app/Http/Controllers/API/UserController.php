@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\User as ModelsUser;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 use Illuminate\Support\Str;
 
@@ -28,23 +28,20 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'email' => 'required',
+            'password' => 'required|min:8|confirmed',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
-        }
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'api_token' => Str::random(60)
+        ]);
 
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = ModelsUser::create($input);
-        $success['token'] =  $user->createToken('nApp')->accessToken;
-        $success['name'] =  $user->name;
-
-        return response()->json(['success'=>$success], $this->successStatus);
+        return response($user);
     }
 
     public function details()
