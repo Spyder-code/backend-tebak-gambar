@@ -29,6 +29,8 @@ Route::post('register', [App\Http\Controllers\API\UserController::class,'registe
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('details', [App\Http\Controllers\API\UserController::class,'details']);
+	Route::post('updateProfile', [App\Http\Controllers\API\UserController::class,'updateProfile']);
+	Route::post('updatePassword', [App\Http\Controllers\API\UserController::class,'updatePassword']);
 	Route::post('logout', [App\Http\Controllers\API\UserController::class,'logout']);
 });
 

@@ -67,4 +67,33 @@ class UserController extends Controller
             'code' => 401,
         ], 401);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $name = $request->name;
+        $id = Auth::id();
+
+        User::find($id)->update([
+            'name' => $name
+        ]);
+
+        $user = User::find($id);
+        return $user;
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $current = $request->current_password;
+        $new = $request->new_password;
+        $password = Auth::user()->password;
+        if(Hash::check($current, $password)){
+            User::find(Auth::id())
+            ->update([
+            'password' => Hash::make($new)
+            ]);
+            return "Password berhasil diubah";
+        } else {
+            return "Password salah";
+        }
+    }
 }
