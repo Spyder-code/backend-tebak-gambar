@@ -22,7 +22,7 @@ class Room extends Model
     use HasFactory;
 
     public $table = 'rooms';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -55,5 +55,8 @@ class Room extends Model
         'name' => 'required'
     ];
 
-    
+    public function roomPlay()
+    {
+        return $this->hasMany(RoomPlay::class);
+    }
 }
