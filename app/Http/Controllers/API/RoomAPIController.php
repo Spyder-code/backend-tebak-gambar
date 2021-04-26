@@ -88,7 +88,6 @@ class RoomAPIController extends AppBaseController
             return $this->sendError('Room not found');
         }
 
-        dd($room);
         return $this->sendResponse($room->toArray(), 'Room retrieved successfully');
     }
 
