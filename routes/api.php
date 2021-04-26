@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Models\Room;
 use App\Models\RoomPlay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,10 @@ Route::get('userRoom/{id}', function ($id) {
     if ($data!=null) {
         return $data->room_id;
     }
-
     return 'Null';
+});
+
+Route::get('rooms/detail/{id}', function ($id) {
+    $data = Room::find($id);
+    return $data;
 });
