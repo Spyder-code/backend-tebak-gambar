@@ -34,11 +34,19 @@ class RoomAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $rooms = $this->roomRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        // $rooms = $this->roomRepository->all(
+        //     $request->except(['skip', 'limit']),
+        //     $request->get('skip'),
+        //     $request->get('limit')
+        // );
+
+        $rooms = Room::all();
+        $a = 0;
+        foreach ($rooms as $item ) {
+            $data = Room::find($item->id)->roomPlay()->count();
+            $rooms[$a]['total'] = $data;
+            $a++;
+        }
 
         return $this->sendResponse($rooms->toArray(), 'Rooms retrieved successfully');
     }
