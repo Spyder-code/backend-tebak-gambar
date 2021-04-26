@@ -82,7 +82,7 @@ class RoomAPIController extends AppBaseController
 
         $room = RoomPlay::join('rooms','rooms.id','=','room_plays.room_id')
         ->join('users','users.id','=','room_plays.user_id')
-        ->where('room_id',$id)->select('rooms.name as room_name','users.name as user_name')->get();
+        ->where('room_id',$id)->select('room_plays.id','rooms.name as room_name','users.name as user_name')->get();
 
         if (empty($room)) {
             return $this->sendError('Room not found');

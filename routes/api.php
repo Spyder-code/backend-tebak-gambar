@@ -56,7 +56,7 @@ Route::get('rooms/detail/{id}', function ($id) {
     return $data;
 });
 
-Route::post('users/status/{id}/{no}', function ($id,$no) {
+Route::get('users/status/{id}/{no}', function ($id,$no) {
     $data = User::find($id)->update(['status'=>$no]);
     return $data;
 });
