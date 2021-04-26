@@ -42,6 +42,10 @@ Route::resource('room_plays', App\Http\Controllers\API\RoomPlayAPIController::cl
 
 Route::resource('log_activities', App\Http\Controllers\API\LogActivityAPIController::class);
 Route::get('userRoom/{id}', function ($id) {
-    $data = RoomPlay::where('user_id',$id)->where('status',1)->first();
-    return $data->room_id;
+    $data = RoomPlay::where('user_id',$id)->where('status',0)->first();
+    if ($data!=null) {
+        return $data->room_id;
+    }
+
+    return 'Null';
 });
