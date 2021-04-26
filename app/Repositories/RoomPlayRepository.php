@@ -19,7 +19,8 @@ class RoomPlayRepository extends BaseRepository
     protected $fieldSearchable = [
         'room_id',
         'user_id',
-        'point'
+        'point',
+        'status'
     ];
 
     /**

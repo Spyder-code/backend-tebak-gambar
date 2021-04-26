@@ -19,6 +19,7 @@ class CreateRoomPlaysTable extends Migration
             $table->integer('room_id')->unsigned();
             $table->foreignId('user_id')->constrained();
             $table->integer('point');
+            $table->integer('status');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('room_id')->references('id')->on('rooms');

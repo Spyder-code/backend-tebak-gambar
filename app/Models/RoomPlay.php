@@ -22,7 +22,7 @@ class RoomPlay extends Model
     use HasFactory;
 
     public $table = 'room_plays';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -31,7 +31,8 @@ class RoomPlay extends Model
     public $fillable = [
         'room_id',
         'user_id',
-        'point'
+        'point',
+        'status'
     ];
 
     /**
@@ -43,7 +44,8 @@ class RoomPlay extends Model
         'id' => 'integer',
         'room_id' => 'integer',
         'user_id' => 'integer',
-        'point' => 'integer'
+        'point' => 'integer',
+        'status' => 'integer'
     ];
 
     /**
@@ -52,8 +54,8 @@ class RoomPlay extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }
