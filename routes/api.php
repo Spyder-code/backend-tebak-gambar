@@ -60,3 +60,11 @@ Route::get('users/status/{id}/{no}', function ($id,$no) {
     $data = User::find($id)->update(['status'=>$no]);
     return $data;
 });
+
+Route::get('roomPlay/{id}', function ($id) {
+    $data = RoomPlay::where('user_id',$id)->where('status',0)->first();
+    if ($data!=null) {
+        return $data->id;
+    }
+    return 'Null';
+});
