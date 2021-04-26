@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Models\Room;
 use App\Models\RoomPlay;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,5 +53,10 @@ Route::get('userRoom/{id}', function ($id) {
 
 Route::get('rooms/detail/{id}', function ($id) {
     $data = Room::find($id);
+    return $data;
+});
+
+Route::post('users/status/{id}/{no}', function ($id,$no) {
+    $data = User::find($id)->update(['status'=>$no]);
     return $data;
 });
