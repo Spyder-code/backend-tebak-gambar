@@ -62,7 +62,7 @@ Route::get('users/status/{id}/{no}', function ($id,$no) {
 });
 
 Route::get('roomPlay/{id}/{roomId}', function ($id,$roomId) {
-    $data = RoomPlay::where('user_id',$id)->where('user_id',$roomId)->first();
+    $data = RoomPlay::where('user_id',$id)->where('room_id',$roomId)->first();
     if ($data!=null) {
         return $data->id;
     }
