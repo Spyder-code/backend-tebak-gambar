@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
         \App\Models\Room::factory(10)->create();
-        \App\Models\RoomPlay::factory(10)->create();
-        \App\Models\LogActivity::factory(10)->create();
+        // \App\Models\RoomPlay::factory(10)->create();
+        // \App\Models\LogActivity::factory(10)->create();
     }
 }

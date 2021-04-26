@@ -8,6 +8,7 @@ use App\Models\Room;
 use App\Repositories\RoomRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use App\Models\RoomPlay;
 use Response;
 
 /**
@@ -78,13 +79,16 @@ class RoomAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Room $room */
-        $room = $this->roomRepository->find($id);
+
+        $room = RoomPlay::join('rooms','rooms.id','=','room_plays.room_id')
+        ->join('users','users.id','=','room_plays.user_id')
+        ->where('room_id',$id)->select('rooms.name as room_name','users.name as user_name')->get();
 
         if (empty($room)) {
             return $this->sendError('Room not found');
         }
 
+        dd($room);
         return $this->sendResponse($room->toArray(), 'Room retrieved successfully');
     }
 
