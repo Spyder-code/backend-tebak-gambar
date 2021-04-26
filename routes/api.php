@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Models\RoomPlay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,3 +41,7 @@ Route::resource('rooms', App\Http\Controllers\API\RoomAPIController::class);
 Route::resource('room_plays', App\Http\Controllers\API\RoomPlayAPIController::class);
 
 Route::resource('log_activities', App\Http\Controllers\API\LogActivityAPIController::class);
+Route::get('userRoom/{id}', function ($id) {
+    $data = RoomPlay::where('user_id',$id)->where('status',0)->first();
+    return $data->room_id;
+});
