@@ -16,11 +16,10 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
             $table->integer('status');
             $table->timestamps();
-            $table->softDeletes();
             // $table->foreign('user_id')->references('id')->on('users');
         });
     }
